@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import ComplianceSection from './components/ComplianceSection';
@@ -17,18 +16,6 @@ import WhatsAppButton from './components/WhatsAppButton';
 function App() {
   return (
     <>
-      <Helmet>
-        <title>X4AGRO — Compliance e Governança para o Agronegócio</title>
-        <meta
-          name="description"
-          content="Proteja seu negócio rural com programas de compliance sob medida. Diagnóstico de riscos, controles internos, auditorias e treinamentos para produtores rurais."
-        />
-        <meta
-          name="keywords"
-          content="compliance agronegócio, governança rural, gestão fazenda, controles internos agro, auditoria rural, X4AGRO"
-        />
-      </Helmet>
-
       <Navbar />
 
       <main>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Phone, Mail, Globe } from 'lucide-react';
-import InputMask from 'react-input-mask';
 
 const ContatoSection = () => {
   const [formData, setFormData] = useState({
@@ -17,6 +16,24 @@ const ContatoSection = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (feedback) setFeedback(null);
+  };
+
+  const handlePhoneChange = (e) => {
+    const value = e.target.value.replace(/\D/g, '');
+    let formatted = value;
+
+    if (value.length > 0) {
+      if (value.length <= 2) {
+        formatted = `(${value}`;
+      } else if (value.length <= 7) {
+        formatted = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+      } else {
+        formatted = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7, 11)}`;
+      }
+    }
+
+    setFormData((prev) => ({ ...prev, phone: formatted }));
     if (feedback) setFeedback(null);
   };
 
@@ -160,11 +177,12 @@ const ContatoSection = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div>
                   <label className="block text-sm font-medium text-escuro/70 mb-1">Telefone</label>
-                  <InputMask
-                    mask="(99) 99999-9999"
+                  <input
+                    type="tel"
                     name="phone"
                     value={formData.phone}
-                    onChange={handleChange}
+                    onChange={handlePhoneChange}
+                    maxLength={15}
                     className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-verde-escuro focus:ring-1 focus:ring-verde-escuro outline-none transition-all text-escuro"
                     placeholder="(99) 99999-9999"
                   />
