@@ -42,15 +42,30 @@ const ContatoSection = () => {
     setIsLoading(true);
     setFeedback(null);
 
-    // Simula envio — integrar com backend real depois
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      setFeedback({
-        type: 'success',
-        message: 'Mensagem enviada com sucesso! Entraremos em contato em breve.',
+      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
+      const response = await fetch(`${API_URL}/api/contato`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
-      setFormData({ name: '', email: '', phone: '', propriedade: '', message: '' });
-    } catch {
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setFeedback({
+          type: 'success',
+          message: 'Mensagem enviada com sucesso! Entraremos em contato em breve.',
+        });
+        setFormData({ name: '', email: '', phone: '', propriedade: '', message: '' });
+      } else {
+        throw new Error(data.detail || 'Erro ao enviar mensagem');
+      }
+    } catch (error) {
+      console.error('Erro ao enviar formulário:', error);
       setFeedback({
         type: 'error',
         message: 'Erro ao enviar. Tente novamente ou entre em contato por WhatsApp.',
