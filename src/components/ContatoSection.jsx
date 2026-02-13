@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Phone, Mail, Globe } from 'lucide-react';
+import { Send, Phone, Mail } from 'lucide-react';
 
 const ContatoSection = () => {
   const [formData, setFormData] = useState({
@@ -135,20 +135,6 @@ const ContatoSection = () => {
               </div>
             </a>
 
-            <a
-              href="https://www.x4payassessoria.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-4 bg-white/10 rounded-xl p-5 hover:bg-white/15 transition-all border border-white/10"
-            >
-              <div className="w-12 h-12 bg-verde-claro rounded-xl flex items-center justify-center flex-shrink-0">
-                <Globe size={22} className="text-white" />
-              </div>
-              <div>
-                <p className="text-white font-semibold">Site</p>
-                <p className="text-white/60 text-sm">www.x4payassessoria.com</p>
-              </div>
-            </a>
           </motion.div>
 
           {/* Form */}

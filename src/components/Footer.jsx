@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, Globe } from 'lucide-react';
+import { Phone, Mail } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -15,9 +15,7 @@ const Footer = () => {
               </span>
             </div>
             <p className="text-white/70 text-sm leading-relaxed">
-              X4AGRO — Compliance e Governança para o Agronegócio
-              <br />
-              Uma vertical X4PAY Assessoria
+              X4AGRO - Compliance e Governança para o Agronegócio.
             </p>
           </div>
 
@@ -41,21 +39,12 @@ const Footer = () => {
                 <Mail size={16} />
                 contato@x4payassessoria.com
               </a>
-              <a
-                href="https://www.x4payassessoria.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 text-white/70 hover:text-verde-claro transition-colors text-sm"
-              >
-                <Globe size={16} />
-                www.x4payassessoria.com
-              </a>
             </div>
           </div>
 
           {/* Links Rápidos */}
           <div>
-            <h4 className="font-semibold text-lg mb-4">Links Rápidos</h4>
+            <h4 className="font-semibold text-lg mb-4">Saiba mais</h4>
             <div className="space-y-2">
               {[
                 { label: 'Compliance', href: '#compliance' },
@@ -81,7 +70,7 @@ const Footer = () => {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <p className="text-center text-white/50 text-xs">
-            &copy; 2026 X4PAY Assessoria. Todos os direitos reservados.
+            &copy; 2026 X4PAY Assessoria LTDA | CNPJ: 59.088.251/0001-12 | Todos os direitos reservados
           </p>
         </div>
       </div>

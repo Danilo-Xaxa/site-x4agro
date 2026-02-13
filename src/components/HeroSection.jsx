@@ -65,7 +65,7 @@ const HeroSection = () => {
           >
             <span className="inline-flex items-center gap-2 bg-verde-claro/20 border border-verde-claro/30 text-verde-claro text-sm font-semibold px-4 py-1.5 rounded-full backdrop-blur-sm">
               <Shield size={14} />
-              Vertical X4PAY Assessoria
+              Compliance e Governança
             </span>
           </motion.div>
 

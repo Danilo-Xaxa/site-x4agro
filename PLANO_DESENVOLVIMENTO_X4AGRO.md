@@ -235,7 +235,6 @@ O site é uma single-page landing com scroll suave entre seções. Seguir o mesm
 - **Dados de contato:**
   - WhatsApp: 81 9 8814-3087 (com link direto wa.me)
   - Email: contato@x4payassessoria.com
-  - Site: www.x4payassessoria.com
 - **Formulário:** Nome, Email, Telefone, Nome da Propriedade, Mensagem (opcional). Botão "Agendar Diagnóstico".
 - **Estilo:** Background com imagem de plantação com overlay verde. Texto branco. Formulário em card branco.
 
