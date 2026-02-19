@@ -234,7 +234,7 @@ O site é uma single-page landing com scroll suave entre seções. Seguir o mesm
 - **Subtítulo:** "O primeiro passo é entender suas vulnerabilidades específicas. Agende uma conversa para realizarmos um diagnóstico inicial, sem compromisso."
 - **Dados de contato:**
   - WhatsApp: 81 9 8814-3087 (com link direto wa.me)
-  - Email: contato@x4payassessoria.com
+  - Email: contato@x4agrocompliance.com
 - **Formulário:** Nome, Email, Telefone, Nome da Propriedade, Mensagem (opcional). Botão "Agendar Diagnóstico".
 - **Estilo:** Background com imagem de plantação com overlay verde. Texto branco. Formulário em card branco.
 
@@ -269,7 +269,7 @@ Scroll suave para cada seção (mesmo comportamento do X4PAY).
 ## 5. Footer
 
 - Logo X4AGRO
-- Texto: "X4AGRO — Compliance e Governança para o Agronegócio | Uma vertical X4PAY Assessoria"
+- Texto: "X4AGRO — Compliance e Governança para o Agronegócio"
 - Links: WhatsApp, Email, Site X4PAY
 - Copyright: "© 2025 X4PAY Assessoria. Todos os direitos reservados."
 

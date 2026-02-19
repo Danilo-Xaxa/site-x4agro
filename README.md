@@ -154,15 +154,15 @@ cp .env.example .env
 
 # Editar .env e adicionar:
 # RESEND_API_KEY=re_sua_api_key_aqui
-# CONTACT_EMAIL=contato@x4payassessoria.com
-# FROM_EMAIL=noreply@x4payassessoria.com
+# CONTACT_EMAIL=contato@x4agrocompliance.com
+# FROM_EMAIL=noreply@x4agrocompliance.com
 ```
 
 ### 4. Configurar Resend
 
 1. Acesse [resend.com](https://resend.com) e crie uma conta
 2. Vá em **API Keys** → Criar nova chave
-3. Vá em **Domains** → Adicionar `x4payassessoria.com`
+3. Vá em **Domains** → Adicionar `x4agrocompliance.com`
 4. Configure os registros DNS conforme instruções
 5. Aguarde verificação do domínio
 
@@ -377,10 +377,8 @@ Este projeto é propriedade da **X4PAY Assessoria**. Todos os direitos reservado
 
 ## 📧 Contato
 
-**X4PAY Assessoria**
-- Website: [www.x4payassessoria.com](https://www.x4payassessoria.com)
 - WhatsApp: [(81) 9 8814-3087](https://wa.me/5581988143087)
-- E-mail: contato@x4payassessoria.com
+- E-mail: contato@x4agrocompliance.com
 
 ---
 

@@ -113,8 +113,8 @@ async def enviar_contato(contato: ContatoRequest):
 
         # Enviar e-mail via Resend
         params = {
-            "from": os.getenv("FROM_EMAIL", "noreply@x4payassessoria.com"),
-            "to": [os.getenv("CONTACT_EMAIL", "contato@x4payassessoria.com")],
+            "from": os.getenv("FROM_EMAIL", "noreply@x4agrocompliance.com"),
+            "to": [os.getenv("CONTACT_EMAIL", "contato@x4agrocompliance.com")],
             "subject": f"[X4AGRO] Novo contato de {contato.name}",
             "html": html_body,
             "reply_to": contato.email,

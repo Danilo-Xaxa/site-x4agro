@@ -33,11 +33,11 @@ const Footer = () => {
                 (81) 9 8814-3087
               </a>
               <a
-                href="mailto:contato@x4payassessoria.com"
+                href="mailto:contato@x4agrocompliance.com"
                 className="flex items-center gap-3 text-white/70 hover:text-verde-claro transition-colors text-sm"
               >
                 <Mail size={16} />
-                contato@x4payassessoria.com
+                contato@x4agrocompliance.com
               </a>
             </div>
           </div>

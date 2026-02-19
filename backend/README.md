@@ -45,10 +45,10 @@ Edite `.env` e adicione:
 RESEND_API_KEY=re_sua_key_aqui
 
 # E-mail de destino (quem receberá os contatos)
-CONTACT_EMAIL=contato@x4payassessoria.com
+CONTACT_EMAIL=contato@x4agrocompliance.com
 
 # E-mail remetente (precisa ser do domínio verificado na Resend)
-FROM_EMAIL=noreply@x4payassessoria.com
+FROM_EMAIL=noreply@x4agrocompliance.com
 
 ENVIRONMENT=development
 ```
@@ -57,7 +57,7 @@ ENVIRONMENT=development
 
 1. Acesse [resend.com](https://resend.com)
 2. Crie uma conta ou faça login
-3. Vá em **Domains** e adicione `x4payassessoria.com`
+3. Vá em **Domains** e adicione `x4agrocompliance.com`
 4. Configure os registros DNS (MX, TXT, CNAME) conforme instruções da Resend
 5. Aguarde verificação (pode levar alguns minutos)
 

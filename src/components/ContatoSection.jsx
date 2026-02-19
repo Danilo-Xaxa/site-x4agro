@@ -123,7 +123,7 @@ const ContatoSection = () => {
             </a>
 
             <a
-              href="mailto:contato@x4payassessoria.com"
+              href="mailto:contato@x4agrocompliance.com"
               className="flex items-center gap-4 bg-white/10 rounded-xl p-5 hover:bg-white/15 transition-all border border-white/10"
             >
               <div className="w-12 h-12 bg-verde-claro rounded-xl flex items-center justify-center flex-shrink-0">
@@ -131,7 +131,7 @@ const ContatoSection = () => {
               </div>
               <div>
                 <p className="text-white font-semibold">E-mail</p>
-                <p className="text-white/60 text-sm">contato@x4payassessoria.com</p>
+                <p className="text-white/60 text-sm">contato@x4agrocompliance.com</p>
               </div>
             </a>
 
