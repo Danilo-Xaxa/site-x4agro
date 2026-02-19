@@ -32,7 +32,11 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
+    const lastCall = { current: 0 };
     const handleScroll = () => {
+      const now = Date.now();
+      if (now - lastCall.current < 100) return;
+      lastCall.current = now;
       setScrolled(window.scrollY > 50);
       updateActiveSection();
     };
@@ -72,8 +76,8 @@ const Navbar = () => {
             <img
               src="/logos/x4agro-logo.svg"
               alt="X4AGRO"
-              className={`transition-all duration-300 ${
-                scrolled ? 'h-9' : 'h-11'
+              className={`transition-all duration-300 w-auto ${
+                scrolled ? 'h-8' : 'h-10'
               }`}
             />
           </a>
@@ -114,7 +118,8 @@ const Navbar = () => {
           <button
             className="lg:hidden text-white p-2"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Menu"
+            aria-label={mobileOpen ? 'Fechar menu' : 'Abrir menu'}
+            aria-expanded={mobileOpen}
           >
             {mobileOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
@@ -135,7 +140,7 @@ const Navbar = () => {
               <img
                 src="/logos/x4agro-logo.svg"
                 alt="X4AGRO"
-                className="h-10"
+                className="h-10 w-auto"
               />
               <button onClick={() => setMobileOpen(false)} className="text-white p-2">
                 <X size={28} />

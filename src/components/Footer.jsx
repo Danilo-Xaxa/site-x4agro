@@ -1,5 +1,6 @@
 import React from 'react';
 import { Phone, Mail } from 'lucide-react';
+import { WHATSAPP_NUMBER, WHATSAPP_DISPLAY, CONTACT_EMAIL } from '../constants';
 
 const Footer = () => {
   return (
@@ -12,7 +13,7 @@ const Footer = () => {
               <img
                 src="/logos/x4agro-logo.svg"
                 alt="X4AGRO"
-                className="h-11"
+                className="h-10 w-auto"
               />
             </div>
             <p className="text-white/70 text-sm leading-relaxed">
@@ -25,20 +26,20 @@ const Footer = () => {
             <h4 className="font-semibold text-lg mb-4">Contato</h4>
             <div className="space-y-3">
               <a
-                href="https://wa.me/5581988143087"
+                href={`https://wa.me/${WHATSAPP_NUMBER}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-white/70 hover:text-verde-claro transition-colors text-sm"
               >
                 <Phone size={16} />
-                (81) 9 8814-3087
+                {WHATSAPP_DISPLAY}
               </a>
               <a
-                href="mailto:contato@x4agrocompliance.com"
+                href={`mailto:${CONTACT_EMAIL}`}
                 className="flex items-center gap-3 text-white/70 hover:text-verde-claro transition-colors text-sm"
               >
                 <Mail size={16} />
-                contato@x4agrocompliance.com
+                {CONTACT_EMAIL}
               </a>
             </div>
           </div>

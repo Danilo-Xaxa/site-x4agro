@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Phone, Mail } from 'lucide-react';
+import { WHATSAPP_NUMBER, WHATSAPP_DISPLAY, CONTACT_EMAIL } from '../constants';
 
 const ContatoSection = () => {
   const [formData, setFormData] = useState({
@@ -43,7 +44,16 @@ const ContatoSection = () => {
     setFeedback(null);
 
     try {
-      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+      const API_URL = process.env.REACT_APP_API_URL;
+
+      if (!API_URL) {
+        setFeedback({
+          type: 'error',
+          message: 'Erro de configuração. Entre em contato por WhatsApp.',
+        });
+        setIsLoading(false);
+        return;
+      }
 
       const response = await fetch(`${API_URL}/api/contato`, {
         method: 'POST',
@@ -108,7 +118,7 @@ const ContatoSection = () => {
             className="space-y-6"
           >
             <a
-              href="https://wa.me/5581988143087"
+              href={`https://wa.me/${WHATSAPP_NUMBER}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-4 bg-white/10 rounded-xl p-5 hover:bg-white/15 transition-all border border-white/10"
@@ -118,12 +128,12 @@ const ContatoSection = () => {
               </div>
               <div>
                 <p className="text-white font-semibold">WhatsApp</p>
-                <p className="text-white/60 text-sm">(81) 9 8814-3087</p>
+                <p className="text-white/60 text-sm">{WHATSAPP_DISPLAY}</p>
               </div>
             </a>
 
             <a
-              href="mailto:contato@x4agrocompliance.com"
+              href={`mailto:${CONTACT_EMAIL}`}
               className="flex items-center gap-4 bg-white/10 rounded-xl p-5 hover:bg-white/15 transition-all border border-white/10"
             >
               <div className="w-12 h-12 bg-verde-claro rounded-xl flex items-center justify-center flex-shrink-0">
@@ -131,7 +141,7 @@ const ContatoSection = () => {
               </div>
               <div>
                 <p className="text-white font-semibold">E-mail</p>
-                <p className="text-white/60 text-sm">contato@x4agrocompliance.com</p>
+                <p className="text-white/60 text-sm">{CONTACT_EMAIL}</p>
               </div>
             </a>
 

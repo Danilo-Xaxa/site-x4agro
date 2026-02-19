@@ -1,39 +1,45 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
-import ComplianceSection from './components/ComplianceSection';
-import PilaresSection from './components/PilaresSection';
-import CasosReaisSection from './components/CasosReaisSection';
-import AutoavaliacaoSection from './components/AutoavaliacaoSection';
-import ComparativoSection from './components/ComparativoSection';
-import ProgramaSection from './components/ProgramaSection';
-import RetornoSection from './components/RetornoSection';
-import TimelineSection from './components/TimelineSection';
-import ContatoSection from './components/ContatoSection';
-import Footer from './components/Footer';
-import WhatsAppButton from './components/WhatsAppButton';
+import ErrorBoundary from './components/ErrorBoundary';
+
+const ComplianceSection = lazy(() => import('./components/ComplianceSection'));
+const PilaresSection = lazy(() => import('./components/PilaresSection'));
+const CasosReaisSection = lazy(() => import('./components/CasosReaisSection'));
+const AutoavaliacaoSection = lazy(() => import('./components/AutoavaliacaoSection'));
+const ComparativoSection = lazy(() => import('./components/ComparativoSection'));
+const ProgramaSection = lazy(() => import('./components/ProgramaSection'));
+const RetornoSection = lazy(() => import('./components/RetornoSection'));
+const TimelineSection = lazy(() => import('./components/TimelineSection'));
+const ContatoSection = lazy(() => import('./components/ContatoSection'));
+const Footer = lazy(() => import('./components/Footer'));
+const WhatsAppButton = lazy(() => import('./components/WhatsAppButton'));
 
 function App() {
   return (
-    <>
+    <ErrorBoundary>
       <Navbar />
 
       <main>
         <HeroSection />
-        <ComplianceSection />
-        <PilaresSection />
-        <CasosReaisSection />
-        <AutoavaliacaoSection />
-        <ComparativoSection />
-        <ProgramaSection />
-        <RetornoSection />
-        <TimelineSection />
-        <ContatoSection />
+        <Suspense fallback={<div className="min-h-screen" />}>
+          <ComplianceSection />
+          <PilaresSection />
+          <CasosReaisSection />
+          <AutoavaliacaoSection />
+          <ComparativoSection />
+          <ProgramaSection />
+          <RetornoSection />
+          <TimelineSection />
+          <ContatoSection />
+        </Suspense>
       </main>
 
-      <Footer />
-      <WhatsAppButton />
-    </>
+      <Suspense fallback={null}>
+        <Footer />
+        <WhatsAppButton />
+      </Suspense>
+    </ErrorBoundary>
   );
 }
 

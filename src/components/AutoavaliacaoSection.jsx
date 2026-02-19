@@ -132,7 +132,7 @@ const AutoavaliacaoSection = () => {
               <AlertTriangle size={18} />
               <span className="font-medium">
                 {nenhum
-                  ? 'Você ainda não marcou nenhuma,sua operação pode estar em risco.'
+                  ? 'Você ainda não marcou nenhuma. Sua operação pode estar em risco.'
                   : `Você marcou apenas ${checked.size} de ${perguntas.length}. Há vulnerabilidades a corrigir.`}
               </span>
             </div>
