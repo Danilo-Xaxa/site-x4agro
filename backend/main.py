@@ -46,8 +46,8 @@ class ContatoRequest(BaseModel):
 @app.get("/")
 async def root():
     return {
-        "message": "X4AGRO API",
-        "version": "1.0.0",
+        "menssagem": "API da X4AGRO",
+        "versão": "1.0",
         "status": "online"
     }
 
