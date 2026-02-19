@@ -78,15 +78,19 @@ Documentação interativa: `http://localhost:8000/docs`
 ## Endpoints
 
 ### `GET /`
+
 Retorna informações da API
 
 ### `GET /health`
+
 Health check do servidor
 
 ### `POST /api/contato`
+
 Envia formulário de contato
 
 **Request Body:**
+
 ```json
 {
   "name": "João Silva",
@@ -98,6 +102,7 @@ Envia formulário de contato
 ```
 
 **Response (200):**
+
 ```json
 {
   "success": true,
@@ -107,46 +112,44 @@ Envia formulário de contato
 ```
 
 **Response (500):**
+
 ```json
 {
   "detail": "Erro ao enviar e-mail via Resend: ..."
 }
 ```
 
-## Deploy
+## Deploy (Railway)
 
-### Vercel
+O backend está configurado para deploy no [Railway](https://railway.app) com `Procfile` e `railway.json`.
 
-1. Instale Vercel CLI:
-```bash
-npm i -g vercel
-```
+### Passo a passo
 
-2. Na raiz do backend:
-```bash
-vercel
-```
-
-3. Configure as variáveis de ambiente no dashboard da Vercel:
+1. Crie um projeto no Railway
+2. Conecte o repositório GitHub
+3. Configure o **Root Directory** para `backend/`
+4. Railway detecta Python automaticamente via `requirements.txt`
+5. Adicione variáveis de ambiente:
    - `RESEND_API_KEY`
    - `CONTACT_EMAIL`
    - `FROM_EMAIL`
+6. Deploy automático a cada push
 
-### Render / Railway / Fly.io
+### Configuração
 
-Todas essas plataformas suportam FastAPI nativamente. Basta:
-1. Conectar o repositório
-2. Definir `python main.py` como comando de start
-3. Configurar as env vars
+- **Procfile**: `web: uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}`
+- **railway.json**: Healthcheck em `/health`, restart automático em falha
 
 ## CORS
 
-O backend já está configurado para aceitar requisições de:
-- `http://localhost:3000` (React dev)
-- `https://x4agro.vercel.app` (produção - ajustar URL)
-- `https://*.vercel.app` (preview deployments)
+O backend aceita requisições das seguintes origens (configurado em `main.py`):
 
-Se mudar o domínio de produção, atualize a lista em `main.py`.
+- `http://localhost:3000` (React dev)
+- `http://localhost:5173` (Vite dev)
+- `https://x4agrocompliance.com` (produção)
+- `https://www.x4agrocompliance.com` (produção com www)
+- `https://x4agro.vercel.app` (Vercel principal)
+- `https://*.vercel.app` (preview deployments)
 
 ## Testes
 
@@ -167,10 +170,12 @@ curl -X POST http://localhost:8000/api/contato \
 
 ## Estrutura
 
-```
+```text
 backend/
 ├── main.py              # Aplicação FastAPI
 ├── requirements.txt     # Dependências Python
+├── Procfile             # Start command para Railway
+├── railway.json         # Config Railway (healthcheck, restart)
 ├── .env                 # Variáveis de ambiente (não commitado)
 ├── .env.example         # Template de .env
 ├── .gitignore          # Git ignore
@@ -180,14 +185,17 @@ backend/
 ## Troubleshooting
 
 ### Erro: "API key do Resend não configurada"
+
 - Verifique se o arquivo `.env` existe
 - Confirme que `RESEND_API_KEY` está definida corretamente
 
 ### Erro: "Domain not verified"
+
 - Acesse o dashboard da Resend
 - Verifique se todos os registros DNS foram configurados
 - Aguarde alguns minutos para propagação DNS
 
 ### CORS error no frontend
+
 - Verifique se a URL do frontend está na lista `allow_origins`
 - Confirme que o backend está rodando

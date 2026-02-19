@@ -24,7 +24,9 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",  # React dev
         "http://localhost:5173",  # Vite dev
-        "https://x4agro.vercel.app",  # Produção (ajustar depois)
+        "https://x4agrocompliance.com",  # Produção
+        "https://www.x4agrocompliance.com",  # Produção com www
+        "https://x4agro.vercel.app",  # Vercel principal
         "https://*.vercel.app",  # Preview deployments Vercel
     ],
     allow_credentials=True,
@@ -104,7 +106,7 @@ async def enviar_contato(contato: ContatoRequest):
                         {f'<div class="field"><span class="label">Mensagem:</span><span class="value">{contato.message}</span></div>' if contato.message else ''}
                     </div>
                     <div class="footer">
-                        <p>Este e-mail foi enviado através do formulário de contato em x4agro.com</p>
+                        <p>Este e-mail foi enviado através do formulário de contato em x4agrocompliance.com</p>
                     </div>
                 </div>
             </body>

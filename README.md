@@ -54,8 +54,11 @@ O X4AGRO oferece programas de compliance personalizados para produtores rurais, 
 - **Pydantic** - Validação de dados
 
 ### DevOps & Ferramentas
-- **Vercel** - Deploy frontend (recomendado)
-- **Render/Railway** - Deploy backend (recomendado)
+
+- **Vercel** - Deploy frontend
+- **Railway** - Deploy backend
+- **HostGator** - Domínio `x4agrocompliance.com`
+- **Resend** - E-mails transacionais (domínio verificado)
 - **Git** - Controle de versão
 
 ---
@@ -65,12 +68,14 @@ O X4AGRO oferece programas de compliance personalizados para produtores rurais, 
 ```
 site-x4agro/
 ├── public/                    # Arquivos públicos
-│   ├── index.html            # HTML base
-│   └── favicon.ico           # Favicon
+│   ├── index.html            # HTML base (SEO + Open Graph)
+│   ├── favicon.ico           # Favicon
+│   └── logos/
+│       └── x4agro-logo.svg  # Logo vetorial (X4 #8dcd36 + AGRO branco)
 │
 ├── src/                      # Código-fonte React
 │   ├── components/           # Componentes React
-│   │   ├── Navbar.jsx       # Navbar com active state
+│   │   ├── Navbar.jsx       # Navbar com active state + logo SVG
 │   │   ├── HeroSection.jsx  # Hero com gradients + stats
 │   │   ├── ComplianceSection.jsx
 │   │   ├── PilaresSection.jsx
@@ -91,6 +96,8 @@ site-x4agro/
 ├── backend/                  # API FastAPI
 │   ├── main.py              # Aplicação FastAPI
 │   ├── requirements.txt     # Dependências Python
+│   ├── Procfile             # Start command para Railway
+│   ├── railway.json         # Config Railway (healthcheck, restart)
 │   ├── .env.example         # Template variáveis de ambiente
 │   ├── .gitignore          # Git ignore
 │   └── README.md           # Docs backend
@@ -233,68 +240,35 @@ vercel
    - Adicione domínio personalizado no dashboard
    - Configure DNS apontando para Vercel
 
-### Backend (Render/Railway/Fly.io)
+### Backend (Railway)
 
-#### Render (Recomendado)
+O backend já possui `Procfile` e `railway.json` configurados.
 
-1. Conecte repositório no [Render](https://render.com)
-2. Crie novo **Web Service**
-3. Configure:
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-   - **Environment**: `Python 3.11`
-4. Adicione variáveis de ambiente:
-   - `RESEND_API_KEY`
-   - `CONTACT_EMAIL`
-   - `FROM_EMAIL`
-5. Deploy
+1. Crie um projeto no [Railway](https://railway.app)
+2. Conecte o repositório GitHub
+3. Configure o **Root Directory** para `backend/`
+4. Railway detecta Python automaticamente via `requirements.txt`
+5. Adicione variáveis de ambiente:
+   - `RESEND_API_KEY` - Chave da API Resend
+   - `CONTACT_EMAIL` - E-mail destino dos contatos
+   - `FROM_EMAIL` - E-mail remetente (domínio verificado)
+6. Deploy automático a cada push
 
-#### Railway
+O `railway.json` configura:
 
-```bash
-# Instalar CLI
-npm i -g @railway/cli
+- Healthcheck em `/health`
+- Restart automático em caso de falha
+- Start command: `uvicorn main:app --host 0.0.0.0 --port ${PORT}`
 
-# Login e deploy
-cd backend
-railway login
-railway init
-railway up
-```
+### CORS em Produção
 
-#### Vercel (Backend como Serverless)
+O CORS já está configurado em `backend/main.py` para:
 
-Crie `vercel.json` na raiz do backend:
-```json
-{
-  "builds": [
-    {
-      "src": "main.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "main.py"
-    }
-  ]
-}
-```
-
-Depois: `vercel --prod`
-
-### Configurar CORS em Produção
-
-No `backend/main.py`, atualize a lista de origins:
-
-```python
-allow_origins=[
-    "https://seu-dominio.com",      # Seu domínio
-    "https://*.vercel.app",          # Vercel preview
-    "http://localhost:3000",         # Dev local
-],
-```
+- `https://x4agrocompliance.com`
+- `https://www.x4agrocompliance.com`
+- `https://x4agro.vercel.app`
+- `https://*.vercel.app` (preview deployments)
+- `http://localhost:3000` (dev local)
 
 ---
 
@@ -312,8 +286,10 @@ allow_origins=[
 - [x] **WhatsApp Flutuante** - Botão fixo com link direto
 - [x] **Animações** - Framer Motion em todas as seções
 - [x] **Responsivo** - Mobile-first design
-- [x] **SEO** - Meta tags otimizadas
+- [x] **SEO** - Meta tags otimizadas + Open Graph + Twitter Card
+- [x] **Logo SVG** - Logo vetorial customizado (X4 verde-limão + AGRO branco)
 - [x] **API Backend** - FastAPI + Resend para e-mails
+- [x] **Deploy Config** - Vercel (frontend) + Railway (backend) prontos
 
 ### Roadmap 🚧
 
