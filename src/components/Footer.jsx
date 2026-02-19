@@ -9,10 +9,11 @@ const Footer = () => {
           {/* Logo e Descrição */}
           <div>
             <div className="mb-4">
-              <span className="text-2xl font-black tracking-tight">
-                <span className="text-marrom">X4</span>
-                <span className="text-white">AGRO</span>
-              </span>
+              <img
+                src="/logos/x4agro-logo.svg"
+                alt="X4AGRO"
+                className="h-11"
+              />
             </div>
             <p className="text-white/70 text-sm leading-relaxed">
               X4AGRO - Compliance e Governança para o Agronegócio.

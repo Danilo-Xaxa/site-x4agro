@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 52" fill="none">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@900&amp;display=swap');
+    </style>
+  </defs>
+  <text
+    font-family="'Inter', 'Arial Black', 'Helvetica Neue', sans-serif"
+    font-weight="900"
+    font-size="48"
+    letter-spacing="-2"
+    dominant-baseline="auto"
+  >
+    <tspan x="0" y="42" fill="#8dcd36">X4</tspan><tspan fill="#FFFFFF">AGRO</tspan>
+  </text>
+</svg>

@@ -68,11 +68,14 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a href="#hero" onClick={(e) => handleClick(e, '#hero')} className="flex items-center gap-1">
-            <span className="text-2xl font-black tracking-tight">
-              <span className="text-marrom">X4</span>
-              <span className="text-white">AGRO</span>
-            </span>
+          <a href="#hero" onClick={(e) => handleClick(e, '#hero')} className="flex items-center">
+            <img
+              src="/logos/x4agro-logo.svg"
+              alt="X4AGRO"
+              className={`transition-all duration-300 ${
+                scrolled ? 'h-9' : 'h-11'
+              }`}
+            />
           </a>
 
           {/* Desktop Links */}
@@ -129,10 +132,11 @@ const Navbar = () => {
             className="lg:hidden fixed inset-0 top-0 bg-verde-escuro z-40 flex flex-col"
           >
             <div className="flex items-center justify-between px-4 py-5">
-              <span className="text-2xl font-black tracking-tight">
-                <span className="text-marrom">X4</span>
-                <span className="text-white">AGRO</span>
-              </span>
+              <img
+                src="/logos/x4agro-logo.svg"
+                alt="X4AGRO"
+                className="h-10"
+              />
               <button onClick={() => setMobileOpen(false)} className="text-white p-2">
                 <X size={28} />
               </button>
