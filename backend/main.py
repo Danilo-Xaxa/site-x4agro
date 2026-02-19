@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr, Field
 from typing import Optional
+from html import escape
 import resend
 import os
 from dotenv import load_dotenv
@@ -27,8 +28,8 @@ app.add_middleware(
         "https://x4agrocompliance.com",  # Produção
         "https://www.x4agrocompliance.com",  # Produção com www
         "https://x4agro.vercel.app",  # Vercel principal
-        "https://*.vercel.app",  # Preview deployments Vercel
     ],
+    allow_origin_regex=r"https://.*\.vercel\.app",  # Preview deployments Vercel
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -46,7 +47,7 @@ class ContatoRequest(BaseModel):
 @app.get("/")
 async def root():
     return {
-        "menssagem": "API da X4AGRO",
+        "mensagem": "API da X4AGRO",
         "versão": "1.0",
         "status": "online"
     }
@@ -70,6 +71,13 @@ async def enviar_contato(contato: ContatoRequest):
                 status_code=500,
                 detail="API key do Resend não configurada"
             )
+
+        # Sanitizar inputs do usuário contra XSS
+        safe_name = escape(contato.name)
+        safe_email = escape(contato.email)
+        safe_phone = escape(contato.phone) if contato.phone else None
+        safe_propriedade = escape(contato.propriedade) if contato.propriedade else None
+        safe_message = escape(contato.message) if contato.message else None
 
         # Montar corpo do e-mail
         html_body = f"""
@@ -95,15 +103,15 @@ async def enviar_contato(contato: ContatoRequest):
                     <div class="content">
                         <div class="field">
                             <span class="label">Nome:</span>
-                            <span class="value">{contato.name}</span>
+                            <span class="value">{safe_name}</span>
                         </div>
                         <div class="field">
                             <span class="label">E-mail:</span>
-                            <span class="value"><a href="mailto:{contato.email}">{contato.email}</a></span>
+                            <span class="value"><a href="mailto:{safe_email}">{safe_email}</a></span>
                         </div>
-                        {f'<div class="field"><span class="label">Telefone:</span><span class="value">{contato.phone}</span></div>' if contato.phone else ''}
-                        {f'<div class="field"><span class="label">Propriedade:</span><span class="value">{contato.propriedade}</span></div>' if contato.propriedade else ''}
-                        {f'<div class="field"><span class="label">Mensagem:</span><span class="value">{contato.message}</span></div>' if contato.message else ''}
+                        {f'<div class="field"><span class="label">Telefone:</span><span class="value">{safe_phone}</span></div>' if safe_phone else ''}
+                        {f'<div class="field"><span class="label">Propriedade:</span><span class="value">{safe_propriedade}</span></div>' if safe_propriedade else ''}
+                        {f'<div class="field"><span class="label">Mensagem:</span><span class="value">{safe_message}</span></div>' if safe_message else ''}
                     </div>
                     <div class="footer">
                         <p>Este e-mail foi enviado através do formulário de contato em x4agrocompliance.com</p>
@@ -131,14 +139,16 @@ async def enviar_contato(contato: ContatoRequest):
         }
 
     except resend.exceptions.ResendError as e:
+        print(f"[RESEND ERROR] {str(e)}")
         raise HTTPException(
             status_code=500,
-            detail=f"Erro ao enviar e-mail via Resend: {str(e)}"
+            detail="Erro ao enviar e-mail. Tente novamente mais tarde."
         )
     except Exception as e:
+        print(f"[CONTATO ERROR] {str(e)}")
         raise HTTPException(
             status_code=500,
-            detail=f"Erro interno: {str(e)}"
+            detail="Erro interno. Tente novamente mais tarde."
         )
 
 

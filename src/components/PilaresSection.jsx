@@ -74,9 +74,7 @@ const PilaresSection = () => {
               <motion.div
                 key={i}
                 variants={cardVariants}
-                className={`bg-white rounded-2xl p-8 border-t-4 border-verde-escuro hover:shadow-lg transition-all duration-300 ${
-                  i >= 3 ? 'lg:col-span-1' : ''
-                }`}
+                className="bg-white rounded-2xl p-8 border-t-4 border-verde-escuro hover:shadow-lg transition-all duration-300"
               >
                 <div className="flex items-center gap-4 mb-4">
                   <div className="w-12 h-12 bg-verde-escuro/10 rounded-xl flex items-center justify-center">
