@@ -15,10 +15,11 @@ module.exports = {
         'escuro': '#1A1A1A',
         'vermelho': '#DC2626',
         'amarelo': '#D4A017',
+        'bege-claro': '#F5F0ED',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        display: ['Playfair Display', 'Georgia', 'serif'],
+        display: ['Georgia', 'serif'],
       },
     },
   },
