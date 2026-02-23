@@ -55,7 +55,7 @@ const ContatoSection = () => {
         return;
       }
 
-      const response = await fetch(`${API_URL}/api/contato`, {
+      const response = await fetch(`${API_URL}/contact_x4agro`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
