@@ -18,17 +18,24 @@ const WhatsAppButton = lazy(() => import('./components/WhatsAppButton'));
 function App() {
   return (
     <ErrorBoundary>
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-verde-escuro focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
+        Pular para o conteúdo
+      </a>
       <Navbar />
 
-      <main>
+      <main id="main-content">
         <HeroSection />
-        <Suspense fallback={<div className="min-h-screen" />}>
+        <Suspense fallback={<div className="min-h-[50vh]" />}>
           <ComplianceSection />
           <PilaresSection />
           <CasosReaisSection />
+        </Suspense>
+        <Suspense fallback={<div className="min-h-[50vh]" />}>
           <AutoavaliacaoSection />
           <ComparativoSection />
           <ProgramaSection />
+        </Suspense>
+        <Suspense fallback={<div className="min-h-[50vh]" />}>
           <RetornoSection />
           <TimelineSection />
           <ContatoSection />

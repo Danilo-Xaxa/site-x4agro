@@ -75,7 +75,9 @@ const ContatoSection = () => {
         throw new Error(data.detail || 'Erro ao enviar mensagem');
       }
     } catch (error) {
-      console.error('Erro ao enviar formulário:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Erro ao enviar formulário:', error);
+      }
       setFeedback({
         type: 'error',
         message: 'Erro ao enviar. Tente novamente ou entre em contato por WhatsApp.',
