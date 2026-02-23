@@ -47,19 +47,17 @@ O X4AGRO oferece programas de compliance personalizados para produtores rurais, 
 - **Lucide React** - Ícones modernos
 - **Create React App** - Boilerplate oficial
 
-### Backend
-- **FastAPI 0.115** - Framework Python moderno e rápido
-- **Resend** - Serviço de envio de e-mails transacionais
-- **Uvicorn** - Servidor ASGI de alta performance
-- **Pydantic** - Validação de dados
+### Backend (API compartilhada X4PAY)
+
+O site da X4AGRO **não possui backend proprio**. O formulario de contato consome a API compartilhada da X4PAY, hospedada no Railway (`x4paywebsite-production.up.railway.app`), via rota `POST /contact_x4agro`.
 
 ### DevOps & Ferramentas
 
 - **Vercel** - Deploy frontend
-- **Railway** - Deploy backend
-- **HostGator** - Domínio `x4agrocompliance.com`
-- **Resend** - E-mails transacionais (domínio verificado)
-- **Git** - Controle de versão
+- **Railway** - Backend compartilhado da X4PAY (API unica para ambos os sites)
+- **HostGator** - Dominio `x4agrocompliance.com`
+- **Resend** - E-mails transacionais (via conta X4PAY)
+- **Git** - Controle de versao
 
 ---
 
@@ -93,15 +91,6 @@ site-x4agro/
 │   ├── index.js              # Entry point
 │   └── index.css             # Tailwind + fontes
 │
-├── backend/                  # API FastAPI
-│   ├── main.py              # Aplicação FastAPI
-│   ├── requirements.txt     # Dependências Python
-│   ├── Procfile             # Start command para Railway
-│   ├── railway.json         # Config Railway (healthcheck, restart)
-│   ├── .env.example         # Template variáveis de ambiente
-│   ├── .gitignore          # Git ignore
-│   └── README.md           # Docs backend
-│
 ├── tailwind.config.js       # Config Tailwind (paleta agro)
 ├── package.json             # Dependências Node
 ├── .env.example             # Template env frontend
@@ -126,52 +115,17 @@ git clone https://github.com/seu-usuario/site-x4agro.git
 cd site-x4agro
 ```
 
-### 2. Frontend Setup
+### 2. Setup
 
 ```bash
-# Instalar dependências
+# Instalar dependencias
 npm install
 
-# Configurar variáveis de ambiente
+# Configurar variaveis de ambiente
 cp .env.example .env
-
-# Editar .env
-# REACT_APP_API_URL=http://localhost:8000
 ```
 
-### 3. Backend Setup
-
-```bash
-cd backend
-
-# Criar ambiente virtual
-python -m venv venv
-
-# Ativar ambiente virtual
-# Windows:
-venv\Scripts\activate
-# Linux/Mac:
-source venv/bin/activate
-
-# Instalar dependências
-pip install -r requirements.txt
-
-# Configurar variáveis de ambiente
-cp .env.example .env
-
-# Editar .env e adicionar:
-# RESEND_API_KEY=re_sua_api_key_aqui
-# CONTACT_EMAIL=contato@x4agrocompliance.com
-# FROM_EMAIL=noreply@x4agrocompliance.com
-```
-
-### 4. Configurar Resend
-
-1. Acesse [resend.com](https://resend.com) e crie uma conta
-2. Vá em **API Keys** → Criar nova chave
-3. Vá em **Domains** → Adicionar `x4agrocompliance.com`
-4. Configure os registros DNS conforme instruções
-5. Aguarde verificação do domínio
+O `.env` ja vem configurado para apontar para a API da X4PAY em producao. Para desenvolvimento local, altere `REACT_APP_API_URL` se necessario.
 
 ---
 
@@ -185,90 +139,33 @@ npm start
 
 Acesse: `http://localhost:3000`
 
-### Rodar Backend
+O frontend ja aponta para a API da X4PAY em producao (`x4paywebsite-production.up.railway.app`), entao o formulario de contato funciona mesmo em dev local.
+
+### Scripts disponiveis
 
 ```bash
-cd backend
-python main.py
-```
-
-API disponível em: `http://localhost:8000`
-
-Documentação interativa: `http://localhost:8000/docs`
-
-### Estrutura de desenvolvimento
-
-Com ambos rodando:
-- Frontend: `http://localhost:3000`
-- Backend: `http://localhost:8000`
-- O frontend faz requisições para a API automaticamente
-
-### Scripts disponíveis
-
-```bash
-# Frontend
 npm start          # Dev server com hot reload
-npm run build      # Build de produção
+npm run build      # Build de producao
 npm test           # Rodar testes
-npm run eject      # Ejetar CRA (não recomendado)
-
-# Backend
-python main.py     # Rodar servidor com reload
 ```
 
 ---
 
 ## 🚢 Deploy
 
-### Frontend (Vercel) - Recomendado
+### Frontend (Vercel)
 
-1. **Via CLI:**
-```bash
-npm install -g vercel
-vercel
-```
+1. Conecte o repositorio GitHub no [Vercel](https://vercel.com)
+2. Configure build:
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `build`
+3. Adicione variavel de ambiente:
+   - `REACT_APP_API_URL`: `https://x4paywebsite-production.up.railway.app`
+4. Custom Domain: `x4agrocompliance.com`
 
-2. **Via Dashboard:**
-   - Conecte seu repositório GitHub
-   - Configure build:
-     - **Build Command**: `npm run build`
-     - **Output Directory**: `build`
-   - Adicione variável de ambiente:
-     - `REACT_APP_API_URL`: URL do backend em produção
+### Backend
 
-3. **Custom Domain:**
-   - Adicione domínio personalizado no dashboard
-   - Configure DNS apontando para Vercel
-
-### Backend (Railway)
-
-O backend já possui `Procfile` e `railway.json` configurados.
-
-1. Crie um projeto no [Railway](https://railway.app)
-2. Conecte o repositório GitHub
-3. Configure o **Root Directory** para `backend/`
-4. Railway detecta Python automaticamente via `requirements.txt`
-5. Adicione variáveis de ambiente:
-   - `RESEND_API_KEY` - Chave da API Resend
-   - `CONTACT_EMAIL` - E-mail destino dos contatos
-   - `FROM_EMAIL` - E-mail remetente (domínio verificado)
-6. Deploy automático a cada push
-
-O `railway.json` configura:
-
-- Healthcheck em `/health`
-- Restart automático em caso de falha
-- Start command: `uvicorn main:app --host 0.0.0.0 --port ${PORT}`
-
-### CORS em Produção
-
-O CORS já está configurado em `backend/main.py` para:
-
-- `https://x4agrocompliance.com`
-- `https://www.x4agrocompliance.com`
-- `https://x4agro.vercel.app`
-- `https://*.vercel.app` (preview deployments)
-- `http://localhost:3000` (dev local)
+Nao e necessario deploy de backend. O site usa a **API compartilhada da X4PAY** (`x4paywebsite-production.up.railway.app`) que ja esta no ar no Railway. O CORS ja esta configurado para aceitar requisicoes dos dominios da X4AGRO.
 
 ---
 
@@ -288,8 +185,8 @@ O CORS já está configurado em `backend/main.py` para:
 - [x] **Responsivo** - Mobile-first design
 - [x] **SEO** - Meta tags otimizadas + Open Graph + Twitter Card
 - [x] **Logo SVG** - Logo vetorial customizado (X4 verde-limão + AGRO branco)
-- [x] **API Backend** - FastAPI + Resend para e-mails
-- [x] **Deploy Config** - Vercel (frontend) + Railway (backend) prontos
+- [x] **API Backend** - API compartilhada da X4PAY (rota `/contact_x4agro`)
+- [x] **Deploy Config** - Vercel (frontend) + Railway (backend X4PAY)
 
 ### Roadmap 🚧
 
