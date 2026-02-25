@@ -141,6 +141,7 @@ const Navbar = () => {
                 src="/logos/x4agro-logo.svg"
                 alt="X4AGRO"
                 className="h-10 w-auto"
+                loading="lazy"
               />
               <button onClick={() => setMobileOpen(false)} className="text-white p-2">
                 <X size={28} />

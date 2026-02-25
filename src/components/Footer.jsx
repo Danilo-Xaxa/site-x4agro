@@ -14,6 +14,7 @@ const Footer = () => {
                 src="/logos/x4agro-logo.svg"
                 alt="X4AGRO"
                 className="h-10 w-auto"
+                loading="lazy"
               />
             </div>
             <p className="text-white/70 text-sm leading-relaxed">

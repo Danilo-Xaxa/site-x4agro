@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import ErrorBoundary from './components/ErrorBoundary';
+import SectionSkeleton from './components/SectionSkeleton';
 
 const ComplianceSection = lazy(() => import('./components/ComplianceSection'));
 const PilaresSection = lazy(() => import('./components/PilaresSection'));
@@ -25,17 +26,17 @@ function App() {
 
       <main id="main-content">
         <HeroSection />
-        <Suspense fallback={<div className="min-h-[50vh]" />}>
+        <Suspense fallback={<SectionSkeleton />}>
           <ComplianceSection />
           <PilaresSection />
           <CasosReaisSection />
         </Suspense>
-        <Suspense fallback={<div className="min-h-[50vh]" />}>
+        <Suspense fallback={<SectionSkeleton />}>
           <AutoavaliacaoSection />
           <ComparativoSection />
           <ProgramaSection />
         </Suspense>
-        <Suspense fallback={<div className="min-h-[50vh]" />}>
+        <Suspense fallback={<SectionSkeleton />}>
           <RetornoSection />
           <TimelineSection />
           <ContatoSection />

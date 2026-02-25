@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { X, Check, Star } from 'lucide-react';
+import SectionTitle from './SectionTitle';
 
 const reativo = [
   'Custos inesperados com multas e litígios.',
@@ -20,18 +21,10 @@ const ComparativoSection = () => {
   return (
     <section id="comparativo" className="py-20 lg:py-28 bg-branco">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-escuro">
-            Sua gestão é <span className="text-vermelho">reativa</span> ou{' '}
-            <span className="text-verde-escuro">estratégica?</span>
-          </h2>
-        </motion.div>
+        <SectionTitle>
+          Sua gestão é <span className="text-vermelho">reativa</span> ou{' '}
+          <span className="text-verde-escuro">estratégica?</span>
+        </SectionTitle>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
           {/* Reativo */}

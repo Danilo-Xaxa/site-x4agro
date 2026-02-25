@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Eye, GraduationCap, Megaphone } from 'lucide-react';
+import SectionTitle from './SectionTitle';
+import { containerVariants, cardVariants } from '../utils/motionVariants';
 
 const cards = [
   {
@@ -25,39 +27,23 @@ const cards = [
   },
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.15 },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
-
 const ComplianceSection = () => {
   return (
     <section id="compliance" className="py-20 lg:py-28 bg-branco">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+        <SectionTitle
+          subtitle={
+            <>
+              É um sistema de gestão inteligente desenhado para proteger seu negócio de
+              dentro para fora. É a arquitetura da sua{' '}
+              <span className="font-semibold text-marrom">fortaleza!</span>
+            </>
+          }
+          subtitleClassName="max-w-3xl mt-6"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-escuro">
-            O que é um Programa de{' '}
-            <span className="text-verde-escuro">Compliance</span> na prática?
-          </h2>
-          <p className="mt-6 text-lg text-escuro/70 max-w-3xl mx-auto leading-relaxed">
-            É um sistema de gestão inteligente desenhado para proteger seu negócio de
-            dentro para fora. É a arquitetura da sua{' '}
-            <span className="font-semibold text-marrom">fortaleza!</span>
-          </p>
-        </motion.div>
+          O que é um Programa de{' '}
+          <span className="text-verde-escuro">Compliance</span> na prática?
+        </SectionTitle>
 
         <motion.div
           variants={containerVariants}

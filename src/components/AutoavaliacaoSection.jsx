@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { CircleCheck, Circle, ArrowRight, AlertTriangle } from 'lucide-react';
+import SectionTitle from './SectionTitle';
+import { containerVariantsFast, itemVariantsX } from '../utils/motionVariants';
+import { trackAutoavaliacaoComplete, trackWhatsAppClick } from '../utils/analytics';
 
 const perguntas = [
   'Quantas pessoas têm acesso às contas correntes da empresa hoje?',
@@ -11,16 +14,6 @@ const perguntas = [
   'Sua empresa tem as devidas políticas de Compliance?',
   'A empresa hoje atende às certificações para a conformidade legal no agronegócio brasileiro?',
 ];
-
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, x: -30 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-};
 
 const AutoavaliacaoSection = () => {
   const [checked, setChecked] = useState(new Set());
@@ -43,21 +36,15 @@ const AutoavaliacaoSection = () => {
   return (
     <section id="autoavaliacao" className="py-20 lg:py-28 bg-verde-escuro">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
+        <SectionTitle
+          dark
           className="text-center mb-6"
+          subtitleClassName="text-white/50"
+          subtitle="Marque as perguntas que você consegue responder com segurança"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
-            Sua operação está realmente{' '}
-            <span className="text-verde-claro">protegida?</span>
-          </h2>
-          <p className="mt-4 text-white/50 text-lg">
-            Marque as perguntas que você consegue responder com segurança
-          </p>
-        </motion.div>
+          Sua operação está realmente{' '}
+          <span className="text-verde-claro">protegida?</span>
+        </SectionTitle>
 
         {/* Progress bar */}
         <motion.div
@@ -84,7 +71,7 @@ const AutoavaliacaoSection = () => {
         </motion.div>
 
         <motion.div
-          variants={containerVariants}
+          variants={containerVariantsFast}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
@@ -95,7 +82,7 @@ const AutoavaliacaoSection = () => {
             return (
               <motion.button
                 key={i}
-                variants={itemVariants}
+                variants={itemVariantsX}
                 onClick={() => toggle(i)}
                 className={`w-full flex items-start gap-4 rounded-xl p-5 border text-left transition-all duration-300 ${
                   isChecked
@@ -148,6 +135,10 @@ const AutoavaliacaoSection = () => {
           <div>
             <a
               href="#contato"
+              onClick={() => {
+                trackAutoavaliacaoComplete(checked.size, perguntas.length);
+                trackWhatsAppClick('autoavaliacao_cta');
+              }}
               className="group inline-flex items-center gap-2 bg-verde-claro hover:bg-white hover:text-verde-escuro text-white font-bold px-8 py-4 rounded-xl transition-all duration-300 text-lg"
             >
               Fale com um especialista

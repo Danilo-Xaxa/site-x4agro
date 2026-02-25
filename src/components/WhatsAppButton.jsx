@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { WHATSAPP_NUMBER } from '../constants';
+import { trackWhatsAppClick } from '../utils/analytics';
 
 const WhatsAppIcon = ({ size = 28 }) => (
   <svg
@@ -27,6 +28,7 @@ const WhatsAppButton = () => {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
       aria-label="Fale conosco pelo WhatsApp"
+      onClick={() => trackWhatsAppClick()}
     >
       <WhatsAppIcon size={28} />
       {/* Pulse ring */}

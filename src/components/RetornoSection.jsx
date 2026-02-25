@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ShieldCheck, TrendingUp, Eye, Award } from 'lucide-react';
+import SectionTitle from './SectionTitle';
+import { containerVariants, cardVariants } from '../utils/motionVariants';
 
 const beneficios = [
   {
@@ -25,34 +27,18 @@ const beneficios = [
   },
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
-
 const RetornoSection = () => {
   return (
     <section id="retorno" className="py-20 lg:py-28 bg-verde-escuro">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
+        <SectionTitle
+          dark
           className="text-center mb-6"
+          subtitleClassName="text-xl text-white/70"
+          subtitle="Um programa de compliance bem implementado se paga!"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
-            O Retorno Sobre a <span className="text-verde-claro">Proteção</span>
-          </h2>
-          <p className="mt-4 text-xl text-white/70">
-            Um programa de compliance bem implementado se paga!
-          </p>
-        </motion.div>
+          O Retorno Sobre a <span className="text-verde-claro">Proteção</span>
+        </SectionTitle>
 
         <motion.div
           variants={containerVariants}

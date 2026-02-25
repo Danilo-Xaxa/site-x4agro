@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { AlertTriangle, MapPin, Wheat, DollarSign } from 'lucide-react';
+import { containerVariants, cardVariantsMedium } from '../utils/motionVariants';
 
 const cases = [
   {
@@ -50,15 +51,6 @@ const cases = [
   },
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
 
 const CaseCard = ({ c }) => (
   <div className="bg-verde-escuro rounded-2xl p-6 text-white hover:shadow-xl hover:shadow-verde-claro/10 transition-all duration-300 h-full flex flex-col">
@@ -123,7 +115,7 @@ const CasosReaisSection = () => {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {cases.slice(0, 3).map((c, i) => (
-            <motion.div key={i} variants={cardVariants}>
+            <motion.div key={i} variants={cardVariantsMedium}>
               <CaseCard c={c} />
             </motion.div>
           ))}
@@ -138,7 +130,7 @@ const CasosReaisSection = () => {
           className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 max-w-4xl mx-auto lg:max-w-none lg:grid-cols-2 lg:px-[calc(100%/6)]"
         >
           {cases.slice(3).map((c, i) => (
-            <motion.div key={i + 3} variants={cardVariants}>
+            <motion.div key={i + 3} variants={cardVariantsMedium}>
               <CaseCard c={c} />
             </motion.div>
           ))}

@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { TreePine, FileCheck, Scan, HardHat, ClipboardCheck } from 'lucide-react';
+import SectionTitle from './SectionTitle';
+import { containerVariantsMedium, cardVariantsFast } from '../utils/motionVariants';
 
 const pilares = [
   {
@@ -35,34 +37,16 @@ const pilares = [
   },
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
 const PilaresSection = () => {
   return (
     <section id="pilares" className="py-20 lg:py-28 bg-bege-claro">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-escuro">
-            Pilares <span className="text-verde-escuro">Obrigatórios</span> da Sua Operação
-          </h2>
-        </motion.div>
+        <SectionTitle>
+          Pilares <span className="text-verde-escuro">Obrigatórios</span> da Sua Operação
+        </SectionTitle>
 
         <motion.div
-          variants={containerVariants}
+          variants={containerVariantsMedium}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
@@ -73,7 +57,7 @@ const PilaresSection = () => {
             return (
               <motion.div
                 key={i}
-                variants={cardVariants}
+                variants={cardVariantsFast}
                 className="bg-white rounded-2xl p-8 border-t-4 border-verde-escuro hover:shadow-lg transition-all duration-300"
               >
                 <div className="flex items-center gap-4 mb-4">
